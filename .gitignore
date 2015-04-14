@@ -1,0 +1,9 @@
+.DS_Store
+xcuserdata
+build/*
+dist/*
+coverage.xml
+test-reports/*
+node_modules
+*.xccheckout
+.idea
