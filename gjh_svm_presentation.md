@@ -4,14 +4,32 @@
 
 ---
 
-# okay, so, wonderful, but what can we do with it?
+# me
+- Ruby / iOS engineer at ShopKeep
+- @Noreaster76 on GitHub and Twitter (but don't follow me)
+- [gabe@shopkeep.com](mailto:gabe@shopkeep.com)
+
+---
+
+# ShopKeep
+- iPad-based point of sale system
+- really easy to use, freakin' sweet interface
+- $49/month/register
+- we help the mom & pop shops compete with the big boys
+- ~260 employees
+- headquartered here in NYC; 5 offices globally
+- Ruby, iOS, Go, and Scala
+- data science team
+
+---
+
+# okay, so, wonderful, but what can we do with SVMs?
 - handwriting recognition
 - identifying the most promising sales leads
-- rescue blob spikes
-- e-commerce fraud detection?
-- fraudulent transactions at the register?
+- e-commerce fraud detection
+- detect heart disease?
 
-^ we could use a particular kind of SVM called a one-class SVM, which is a bit different from a two-class SVM in that you don't need to label the training data yourself. we could use it in order to watch out for when we do a production deploy and the numbers of rescue blobs all of a sudden go through the roof. this is a kind of unsupervised learning called anomaly detection or novelty detection. see [scikit-learn](http://scikit-learn.org/stable/modules/svm.html#density-estimation-novelty-detection) for more info.
+^ for something like e-commerce fraud detection, we could use a particular kind of SVM called a one-class SVM, which is a bit different from a two-class SVM in that you don't need to label the training data yourself. this is a kind of unsupervised learning called anomaly detection or novelty detection. see [scikit-learn](http://scikit-learn.org/stable/modules/svm.html#density-estimation-novelty-detection) for more info.
 
 ---
 
@@ -36,7 +54,7 @@
 ## heart dataset from UCI
 
 ```
-age  sex     bp                  hr                        ? 
+age  sex     bp                  hr                        ?
 63.0 1.0 1.0 145.0 233.0 1.0 2.0 150.0 0.0 2.3 3.0 0.0 6.0 1
 67.0 1.0 4.0 160.0 286.0 0.0 2.0 108.0 1.0 1.5 2.0 3.0 3.0 0
 67.0 1.0 4.0 120.0 229.0 0.0 2.0 129.0 1.0 2.6 2.0 2.0 7.0 1
@@ -73,7 +91,7 @@ age  sex     bp                  hr                        ?
 
 # demo
 ## evaluate the results
-^ the absolute baseline performance we could expect from the algorithm is if we just predicted the same for every example in the validation set the most common response from the training set. so, in this case, 76 out of the 170 examples in the training set correspond to cases in which the patient did in fact have heart disease, and 94 out of the 170 examples in the training set correspond to patients without heart disease. as a result, the most common case in the training data was that the patient did not have heart disease. you could therefore just predict there is no heart disease for all examples, since that is what is most common. and you'd be right 56% of the time for the validation set that we're using. (the validation set is the subset of data that we've held out of training the learner. it's supposed to give us a good idea of how our algorithm would perform in production, against *truly* unknown data.) but there's not much nuance or logic in just predicting whatever was the most common. we can do better than that (and if your learner isn't even beating baseline, something is wrong). in this case, our basic SVM got 85% of the predictions right for the validation set. not bad, for an off-the-shelf library we just shoved a bunch of data into, compiled in less than a second, trained in less than a second, and got predictions from in less than a second. But best of all, it saved us the trouble of researching and explicitly coding findings from modern medicine instead.
+^ the absolute baseline performance we could expect from the algorithm is if we just predicted the same for every example in the validation set the most common response from the training set. so, in this case, out of the 170 rows in the training set, 76 correspond to cases in which the patient did in fact have heart disease, and 94 correspond to patients without heart disease. as a result, the most common case in the training data was that the patient did not have heart disease. you could therefore just predict there is no heart disease for all examples, since that is what is most common. and you'd be right 56% of the time for the validation set that we're using. but there's not much nuance or logic in just predicting whatever was the most common. we can do better than that (and if your learner isn't even beating baseline, something is wrong). in this case, our basic SVM got 85% of the predictions right for the validation set. not bad, for an off-the-shelf library we compiled in less than a second, trained in less than a second, shoved a bunch of data into, and got predictions from in less than a second. but best of all, it enabled us to make pretty good predictions without attending medical school and training to become a doctor, for example. we extracted knowledge from a bunch of data we had on hand and can apply that knowledge to unknown data in the future.
 
 ---
 
@@ -132,22 +150,27 @@ whether heart disease is present or absent
 ---
 
 # you divide your data into subsets
-1. training
-1. validation
+1. training set
+1. validation set
+1. test set
 1. production data
 
-^ the data you have on hand when training your model is divided into these four subsets, but this isn't a strict rule. naturally, as you can imagine, they all have a part in the ML process, and you proceed in order from top to bottom.
+^ the data you have on hand when training your model is divided into these subsets like these, but this isn't a strict rule. naturally, as you can imagine, they all have a part in the ML process, and you proceed in order from top to bottom.
 
 ---
 
-# training data
-^ this is a subset of the data you have at the time of training the machine learning algorithm. again, since we're dealing with supervised learning, this data is already labeled as to whether each row represents someone with heart disease or not, for example. in general, the more training data you have, the better, since it allows you to train a more generalized model and one that is less prone to variance in a couple of data points. that is, if you only had a small sample of data on which to train your model, your model might weight a little variation in one of the attributes too sensitively or not sensitively enough, for example.
+# training set
+^ this is a subset of the data you have at the time of training the machine learning algorithm. in general, the more training data you have, the better, since it allows you to train a more generalized model and one that is less prone to variance in a couple of data points. that is, if you only had a small sample of data on which to train your model, your model might weight a little variation in one of the attributes too sensitively or not sensitively enough, for example.
 
 ---
 
-# validation data
+# validation set
 
-^ this is a subset of the data you do not use for training the model.  instead, you run the trained model against it, and because it wasn't used in training the model, the idea is that it will give you a decent idea of how your model would perform if you ever used it in production on unknown (meaning, unlabeled) data. however, because you train models using different parameters or configurations and then run those models on the validation data, and you repeat this process several times until you've found a set of parameters or a configuration that performs well, you can no longer say that the validation data was not involved in the training of the model.
+^ this is a subset of the data you do not use for training the model.  instead, you run the trained model against it, and because it wasn't used in training the model, the idea is that it will give you a decent idea of how your model would perform if you ever used it in production on data points for which you truly do not have the answers. however, because you train models using different parameters or configurations and then run those models on the validation data, and you repeat this process several times until you've found a set of parameters or a configuration that performs well, you can no longer really claim that the validation data was not involved at all in the training of the model. and that's why we set aside yet more rows of data in a final test set, so that when we publish a paper or something to that effect, we can run the model we finally settled on against data points that are truly unknown to it, that had no involvement in its development.
+
+---
+
+# test set
 
 ---
 
@@ -220,7 +243,7 @@ can a human interpret the patterns that the machine has found, or is the model a
 
 ---
 
-# but what if the data is not linearly separable?
+# but what if the data are not linearly separable?
 ## slack variables allow us some room for error and to find a line that doesn't necessarily separate the data perfectly, but still to do the best job we can
 
 ---
@@ -235,7 +258,7 @@ can a human interpret the patterns that the machine has found, or is the model a
 
 ![130%](svm_toy_linear_kernel_demo_2.mov)
 
-^ we've looked at trying to fit a line or a plane to the data in such a way that will best separate one class (say, no heart disease) from the other class (presence of heart disease). we've also discussed what happens if the data overlap a bit and you have to fit the line or plane in such a way that a couple of the training data points fall on the wrong side, with slack variables. but there are cases in which even with slack variables, you still will end up with pretty bad performance. head back to [the LibSVM page](http://www.csie.ntu.edu.tw/~cjlin/libsvm/index.html?js=1#svm-toy-js); make sure to set t = 0 to get a linear kernel; draw a parabolic cloud of data and another cloud of data that surrounds it.
+^ we've looked at trying to fit a line or a plane to the data in such a way that will best separate one class (say, no heart disease) from the other class (presence of heart disease). we've also discussed what happens if the data overlap a bit and you have to fit the line or plane in such a way that a couple of the training data points fall on the wrong side, with slack variables. but there are cases in which even with slack variables, you still will end up with pretty bad performance.
 
 ---
 
@@ -255,7 +278,7 @@ can a human interpret the patterns that the machine has found, or is the model a
 
 # what is going on here?
 
-^ how do these higher order kernels, the polynomial and Gaussian functions work? 
+^ how do these higher order kernels, the polynomial and Gaussian functions work?
 
 ---
 
@@ -417,13 +440,15 @@ predictions = clf.predict(X_test)
 
 ---
 
-# i have books available to lend/give you
+# harrington book
 
-![inline fit](machine_learning_in_action.jpg)![inline fit](machine_learning_tom_mitchell.jpg)
+![inline](machine_learning_in_action.jpg)
 
 ---
 
-# many thanks go to data will, gessner, and josh
+# i have a book available to give you
+
+![inline](machine_learning_tom_mitchell.jpg)
 
 ---
 
