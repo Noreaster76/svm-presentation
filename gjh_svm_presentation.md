@@ -16,7 +16,7 @@
 - really easy to use, freakin' sweet interface
 - $49/month/register
 - we help the mom & pop shops compete with the big boys
-- ~260 employees
+- ~274 employees
 - headquartered here in NYC; 5 offices globally
 - Ruby, iOS, Go, and Scala
 - data science team
@@ -233,7 +233,7 @@ can a human interpret the patterns that the machine has found, or is the model a
 
 ![inline](plot_separating_hyperplane_001.png)
 
-^ generally, a linear kernel requires the least amount of time to train, and works best if your data is linearly separable. it works very much like trying to position an infinitely long yardstick in such a way that it will be the farthest away from all of the datapoints; the datapoints closest to it that most influence its position and slope are the support vectors and are the reason we call this learning algorithm a support vector machine.  however, the metaphor of the infinitely long yardstick can only be applied literally if you have 2 attributes in your data, because you're trying to separate two 2-dimensional clouds of data points. but the heart data we were looking at earlier had not 2 attributes, but 13!! how do we get there? well, if you have 2 attributes, or columns of data, you're positioning an infinite yardstick. if you have 3 attributes, or columns of data, you're trying to position an infinite plane. if you have 4 attributes, you're trying to position a plane in 4 dimensions (not that we can easily visualize that), and so on. so, as far as the heart data goes, you're trying to position a flat plane in 13-dimensional space. but whether you're talking about a line or a plane, regardless of the number of dimensions, we call the line or plane that separates the data the separating hyperplane. but it's the separating hyperplane that we're trying to find throughout all this, so that in the future, we can plot an unclassified or uncategorized data point, and, based on which side of the hyperplane the data point falls, we will have a prediction for which class or category applies to it.
+^ generally, a linear kernel requires the least amount of time to train, and works best if your data is linearly separable. it works very much like trying to position an infinitely long yardstick in such a way that it will be the farthest away from all of the datapoints and best separate them into the two separate classes you're trying to predict; the datapoints closest to it that most influence its position and slope are the support vectors and are the reason we call this learning algorithm a support vector machine.  however, the metaphor of the infinitely long yardstick can only be applied literally if you have 2 attributes in your data, because you're trying to separate two 2-dimensional clouds of data points. but the heart data we were looking at earlier had not 2 attributes, but 13!! how do we get there? well, if you have 2 attributes, or columns of data, you're positioning an infinite yardstick. if you have 3 attributes, or columns of data, you're trying to position an infinite plane. if you have 4 attributes, you're trying to position a plane in 4 dimensions (not that we can easily visualize that), and so on. so, as far as the heart data goes, you're trying to position a flat plane in 13-dimensional space. but whether you're talking about a line or a plane, regardless of the number of dimensions, we call the line or plane that separates the data the separating hyperplane. and it's the separating hyperplane that we're trying to find throughout all this, so that in the future, we can plot an unclassified or uncategorized data point, and, based on which side of the hyperplane the data point falls, we will have a prediction for which class or category applies to it.
 
 ---
 
@@ -318,13 +318,14 @@ can a human interpret the patterns that the machine has found, or is the model a
 ## C, the cost parameter
 ![130%](svm_toy_gaussian_cost_parameter_demo.mov)
 
+^ C is the cost parameter, or how willing we are to settle for a margin that doesn't perfectly separate the data points in the training set.
+
 ---
 
 ## gamma, the spikiness parameter
 ![130%](svm_toy_gaussian_gamma_parameter_demo.mov)
 
-^ even though a high gamma seems to more tightly hug the blue data
-points, we've lost the sense of the overall true function, which was mostly a simple parabola.
+^ "A large gamma gives you a pointed bump in the higher dimensions, a small gamma gives you a softer, broader bump." now, even though a high gamma seems to more tightly hug the blue data points, we've lost the sense of the overall true function, which was mostly a simple parabola.
 
 ---
 
@@ -332,7 +333,7 @@ points, we've lost the sense of the overall true function, which was mostly a si
 ![inline 130%](plot_underfitting_overfitting_001.png)
 ![inline](underfitting.png)![inline](just_right.png)![inline](overfitting.png)
 
-^ a goldilocks and the three bears kind of situation applies to machine learning. has your model not approximated the true data closely enough (by not giving the signal enough weight), has it approximated it _too_ well (by giving noise too much weight), or has it approximated it just right? not that one is necessarily worse than the other, but we do especially watch out for overfitting in training our models and employ tactics to avoid it. i think it's because we'd prefer to be pessimists and say we don't know than be optimists and make claims our models can't necessarily support.
+^ a goldilocks and the three bears kind of situation applies to machine learning. has your model not approximated the true data closely enough (by not giving the signal enough weight), which we see in the left column, has it approximated it _too_ well (by giving noise too much weight), which we see in the right column, or has it approximated it just right, which we see in the center? not that one is necessarily worse than the other, but we do especially watch out for overfitting in training our models and employ tactics to avoid it. i think it's because we'd prefer to be pessimists and say we don't know than be optimists and make claims our models can't necessarily support.
 
 ---
 
@@ -340,7 +341,7 @@ points, we've lost the sense of the overall true function, which was mostly a si
 - C: the cost parameter
 - gamma: controls sharpness of bumps
 
-^ we try to home in on the best performing combinations of C (the cost parameter, or how willing we are to settle for a margin that doesn't perfectly separate the data points in the training set) and gamma. "A large gamma gives you a pointed bump in the higher dimensions, a small gamma gives you a softer, broader bump." we typically search a grid of possible combinations of C and gamma in order to find the best performing values.
+^ we typically try to home in on the best combination of C and gamma by searching a grid of possible combinations.
 
 ---
 
@@ -371,12 +372,14 @@ points, we've lost the sense of the overall true function, which was mostly a si
 # disadvantages
 - can be slow
 
+^ according to [scikit-learn](http://scikit-learn.org/stable/modules/generated/sklearn.svm.SVC.html), the time to train a higher dimension SVM grows by more than O(n^2) (where n is the number of training examples), so, much beyond 10,000 examples, you're looking at a long time to train.
+
 ---
 
 # disadvantages
 - but not too bad if you're using a linear kernel
 
-^ according to [scikit-learn](http://scikit-learn.org/stable/modules/generated/sklearn.svm.SVC.html), the time to train a higher dimension SVM grows by more than O(n^2) (where n is the number of training examples), so, much beyond 10,000 examples, you're looking at a long time to train. however, with a linear SVM (one where you're just trying to linearly separate data, like with a yardstick), the performance is O(n).
+^ however, with a linear SVM (one where you're just trying to linearly separate data, like with a yardstick), the performance is O(n).
 
 ---
 
@@ -419,7 +422,7 @@ predictions = clf.predict(X_test)
 ---
 
 # popular machine learning libraries
-## import your data once and run it on any number of both popular and obscure ML algorithms
+## import your data once and run it on any number of both popular and obscure ML algorithms (SVMS or otherwise)
 ## adapters for calling from many popular languages, including Ruby
 
 - [Weka](http://www.cs.waikato.ac.nz/ml/weka/) -- written by kiwis
