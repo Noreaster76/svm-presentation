@@ -25,7 +25,7 @@ The easiest way to view the slides would be to simply download the file `gjh_svm
 - Navigating back and forth between the markdown and the individual videos might be a bit of a pain
 - Unless you view the markdown in a markdown viewer, you won't see any of the markdown formatting
 
-## Option 2b: Download a ZIP or clone the repository and view the presentation in [Deckset](http://www.decksetapp.com/)
+## Option 2b: Download a ZIP or clone the repository, and then view the presentation in [Deckset](http://www.decksetapp.com/)
 [Downloading a ZIP](https://github.com/Noreaster76/svm-presentation/archive/master.zip) or [cloning the repository](https://help.github.com/articles/cloning-a-repository/) will download all the files, including the markdown and the demo videos, to your machine. You then could open the markdown file (`gjh_svm_presentation.md`) in Deckset.
 
 #### Advantages
