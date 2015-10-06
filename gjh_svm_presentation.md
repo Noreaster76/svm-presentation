@@ -2,6 +2,8 @@
 ## gabe heafitz
 ^ very brief mention of what SVMs are: a popular, easy-to-use machine learning algorithm
 
+#### © 2015 Gabe Heafitz
+
 ---
 
 # me
