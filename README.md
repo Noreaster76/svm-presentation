@@ -1,7 +1,20 @@
 # How to View the Presentation
 
+## Option 0: View the markdown file directly in GitHub
+Just navigate directly to [`gjh_svm_presentation.md`](https://github.com/Noreaster76/svm-presentation/blob/master/gjh_svm_presentation.md).
+
+#### Advantages
+- Easiest method
+- Platform independent (doesn't require a Mac)
+- You can see the speaker notes
+- Free!
+
+#### Disadvantages
+- None of the demo videos will work
+
+
 ## Option 1: Download the PDF
-The easiest way to view the slides would be to simply download the file `gjh_svm_presentation.pdf`.
+The next easiest way to view the slides would be to simply download the file `gjh_svm_presentation.pdf`.
 
 #### Advantages
 - As easy as clicking on a link or two
