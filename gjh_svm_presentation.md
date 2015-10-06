@@ -443,12 +443,6 @@ predictions = clf.predict(X_test)
 
 ---
 
-# i have a book available to give you
-
-![inline](machine_learning_tom_mitchell.jpg)
-
----
-
 # [fit] does anyone have any questions?
 ## examples:
 - are SVMs a good source of riboflavin?
