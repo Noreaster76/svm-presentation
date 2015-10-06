@@ -303,14 +303,6 @@ can a human interpret the patterns that the machine has found, or is the model a
 
 ---
 
-![](spoon-boy.jpg)
-
----
-
-![](keanu_whoa.jpg)
-
----
-
 # gaussian radial basis function parameters
 - C
 - gamma
