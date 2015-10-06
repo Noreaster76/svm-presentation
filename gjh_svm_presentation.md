@@ -299,7 +299,7 @@ can a human interpret the patterns that the machine has found, or is the model a
 ---
 
 ## another example, this time in 3-D
-![130%](svm_toy_higher_dimension_kernels_1.mov)
+![130%](https://www.youtube.com/watch?v=3liCbRZPrZA)
 
 ---
 
