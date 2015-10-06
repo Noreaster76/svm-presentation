@@ -7,13 +7,13 @@
 ---
 
 # me
-- Ruby / iOS engineer at ShopKeep
-- @Noreaster76 on GitHub and Twitter (but don't follow me)
+- Ruby / iOS engineer at [ShopKeep](http://www.shopkeep.com/)
+- @Noreaster76 on [GitHub](https://github.com/Noreaster76) and [Twitter](https://twitter.com/Noreaster76) (but don't follow me)
 - [gabe@shopkeep.com](mailto:gabe@shopkeep.com)
 
 ---
 
-# ShopKeep
+# [ShopKeep](http://www.shopkeep.com/)
 - iPad-based point of sale system
 - really easy to use, freakin' sweet interface
 - $49/month/register
